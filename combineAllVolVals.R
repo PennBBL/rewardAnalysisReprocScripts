@@ -1,5 +1,7 @@
 # AFGR August 5 2016
 
+# This script will need to be modified to load and reflect your data
+
 ##Usage##
 # This script is oging to be used to combine all of the:
 #	1.) JLF Volumes
@@ -10,12 +12,14 @@
 source('/home/arosen/adroseHelperScripts/R/afgrHelpFunc.R')
 install_load('tools')
 
-# Load data
+# Load pre-made data
 jlfVals <- read.csv('/data/joy/BBL/projects/grmpyProcessing2017/structural/OutputROI/JLFvol/jlfVolValues_20160805properSubjFieldsProperColNames.csv')
 ctVals <- read.csv('/data/joy/BBL/projects/grmpyProcessing2017/structural/OutputROI/JLFvol/ctVolValues_20160805properSubjFieldsProperColNames.csv')
 manQA1 <- read.csv('/data/joy/BBL/projects/grmpyProcessing2017/structural/OutputROI/JLFvol/n115_T1ManualQA_20170724.csv')
 voxelDim <- read.csv('/data/joy/BBL/projects/grmpyProcessing2017/structural/OutputROI/JLFvol/voxelVolume_20160805properSubjFields.csv')
 voxelDim <- voxelDim[which(duplicated(voxelDim)=='FALSE'),]
+
+# Load project-specific data
 n477.subjs <- read.csv('/data/joy/BBL/projects/rewardAnalysisReproc/qa/n477_scanid_bblid_date_datexscanid.csv')
 n477.subjs <- n477.subjs[,c(2,1)]
 
@@ -36,15 +40,9 @@ colnames(ctVals)[1:2] <- c('bblid', 'scanid')
 jlfVals[,2] <- strSplitMatrixReturn(charactersToSplit=jlfVals[,2], splitCharacter='x')[,2]
 ctVals[,2] <- strSplitMatrixReturn(charactersToSplit=ctVals[,2], splitCharacter='x')[,2]
 
-## Write the n2416 file's
-#write.csv(jlfVals, paste('/data/joy/BBL/studies/pnc/n2416_dataFreeze/neuroimaging/t1struct/n2416_jlfAntsCTIntersectionVol_',format(Sys.Date(), format="%Y%m%d"),'.csv', sep=''), quote=F, row.names=F)
-#write.csv(ctVals, paste('/data/joy/BBL/studies/pnc/n2416_dataFreeze/neuroimaging/t1struct/n2416_ctVol_',format(Sys.Date(), format="%Y%m%d"),'.csv', sep=''), quote=F, row.names=F)
-#write.csv(jlfWmVals, paste('/data/joy/BBL/studies/pnc/n2416_dataFreeze/neuroimaging/t1struct/n2416_jlfWmVol_',format(Sys.Date(), format="%Y%m%d"),'.csv', sep=''), quote=F, row.names=F)
-
-## Now write the n1601 file
+# Now write the n1601 file
 # Start with JLF volumes
 n477.vol.vals <- merge(n477.subjs, jlfVals, by=c('bblid', 'scanid'))
-#n1601.vol.wm.vals <- merge(n1601.subjs, jlfWmVals, by=c('bblid', 'scanid'))
 n477.vol.ct.vals <- merge(n477.subjs, ctVals, by=c('bblid', 'scanid'))
 
 # Now write the output
