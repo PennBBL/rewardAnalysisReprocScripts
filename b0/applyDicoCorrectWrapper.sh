@@ -8,17 +8,18 @@
 # ---------------------------------------------------------------
 
 ### Do for all reward subjects
-for i in $(ls -d /data/joy/BBL/studies/reward/rawData/*/*/restbold/nifti); do
-bblid=`echo $i | cut -d '/' -f8`
-datexscanid=`echo $i | cut -d '/' -f9`
-
+#for i in $(ls -d /data/joy/BBL/studies/reward/rawData/*/*/restbold/nifti); do
+#bblid=`echo $i | cut -d '/' -f8`
+#datexscanid=`echo $i | cut -d '/' -f9`
+bblid=16973
+datexscanid=20120210x6418
 
 # Create a function which will return the usage of this script
 usage(){
 echo
 echo "Sean Yom	Usage:"
 echo "  This script should be used to call /data/joy/BBL/applications/scripts/bin/dico_correct_v2.sh"
-echo "	It will be used to dico all of the images in the rawData directory that requires dico"
+echo "	It will /data/joy/BBL/studies/reward/processedData/restbold/dico/16973/20120210x6418/16973_20120210x6418_dico.niibe used to dico all of the images in the rawData directory that requires dico"
 echo "	Required input is a text file of the rps images and the respective paths"
 echo "	dicoCorrectWrapper.sh -r <rpsmaps.txt>"
 echo "  Optional arguments:"
@@ -232,7 +233,7 @@ for indexValue in `seq 1 ${fileLength}` ; do
   done
 done
 
-done
+#done
 
 echo "Done with job submission"
 exit 0

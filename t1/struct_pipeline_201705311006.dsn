@@ -34,8 +34,8 @@
 ###################################################################
 
 analysis=struct_pipeline_201705311006
-design=/data/joy/BBL/projects/rewardAnalysisReproc/struct_pipeline_201705311006.dsn
-path_cohort=/data/joy/BBL/projects/rewardAnalysisReproc/n477_cohort.csv
+design=/data/joy/BBL/projects/rewardAnalysisReproc/rewardAnalysisReprocScripts/t1/struct_pipeline_201705311006.dsn
+path_cohort=/data/joy/BBL/projects/rewardAnalysisReproc/subjectLists/n477_cohort.csv
 subjects_ct=477
 xsubj=100088,20130501x7944,/data/joy/BBL/studies/reward/rawData/100088/20130501x7944/t1/nifti/100088_20130501x7944_t1.nii.gz
 xsubj_idx=1
@@ -49,9 +49,9 @@ xfm_warp=
 ixfm_warp=
 xfm_affine=
 ixfm_affine=
-out_super=/data/joy/BBL/studies/reward/processedData/struct_pipeline
-out=/data/joy/BBL/studies/reward/processedData/struct_pipeline/struct_pipeline_201705311006/${subject[0]}/${subject[1]}
-out_group=/data/joy/BBL/studies/reward/processedData/struct_pipeline/struct_pipeline_201705311006
+out_super=/data/joy/BBL/studies/reward/processedData
+out=/data/joy/BBL/studies/reward/processedData/struct_pipeline_201705311006/${subject[0]}/${subject[1]}
+out_group=/data/joy/BBL/studies/reward/processedData/struct_pipeline_201705311006
 space=structural
 template=/data/joy/BBL/studies/reward/templateCohort/template/templateMask/templateBrain.nii.gz
 
@@ -94,7 +94,7 @@ structural_process[1]=ACT
 ###################################################################
 
 gmdMask[2]=/data/joy/BBL/studies/reward/processedData/struct_pipeline/struct_pipeline_201705311006/${subject[0]}/${subject[1]}/antsCT/${subject[0]}_${subject[1]}_BrainExtractionMask
-gmd_rerun[2]=Y
+gmd_rerun[2]=N
 gmd_cleanup[2]=Y
 
 ###################################################################
@@ -110,7 +110,7 @@ jlfCohort[3]=SexBalanced20
 # 4 ROIQUANT
 ###################################################################
 
-roiquant_roi[4]=/home/asharma/example.parc
+roiquant_roi[4]=/data/joy/BBL/projects/rewardAnalysisReproc/rewardAnalysisReprocScripts/t1/example.parc
 roiquant_rerun[4]=N
 roiquant_cleanup[4]=Y
 
