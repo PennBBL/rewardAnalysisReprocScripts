@@ -6,7 +6,7 @@ output: rmarkdown::github_document
 ---
 
 
-###Clinical Data Table construction
+###Clinical Data Table construction for Reward Structure Project 
 
 ####**This script generates a clinical table based on redcap data, clinical QA, and scan availability (T1 and/or restbold)**
 
