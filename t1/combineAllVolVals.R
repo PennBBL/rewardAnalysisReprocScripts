@@ -13,14 +13,13 @@ source('/home/arosen/adroseHelperScripts/R/afgrHelpFunc.R')
 install_load('tools')
 
 # Load pre-made data
-jlfVals <- read.csv('/data/joy/BBL/projects/grmpyProcessing2017/structural/OutputROI/JLFvol/jlfVolValues_20160805properSubjFieldsProperColNames.csv')
-ctVals <- read.csv('/data/joy/BBL/projects/grmpyProcessing2017/structural/OutputROI/JLFvol/ctVolValues_20160805properSubjFieldsProperColNames.csv')
-manQA1 <- read.csv('/data/joy/BBL/projects/grmpyProcessing2017/structural/OutputROI/JLFvol/n115_T1ManualQA_20170724.csv')
-voxelDim <- read.csv('/data/joy/BBL/projects/grmpyProcessing2017/structural/OutputROI/JLFvol/voxelVolume_20160805properSubjFields.csv')
+jlfVals <- read.csv('/data/joy/BBL/projects/rewardAnalysisReproc/qa/t1/output/jlfVolValues_20170719properSubjFields.csv')
+ctVals <- read.csv('/data/joy/BBL/projects/rewardAnalysisReproc/qa/t1/output/ctVolValues_20170719properSubjFields.csv')
+voxelDim <- read.csv('/data/joy/BBL/projects/rewardAnalysisReproc/qa/t1/output/voxelVolume_20170719properSubjFields.csv')
 voxelDim <- voxelDim[which(duplicated(voxelDim)=='FALSE'),]
 
 # Load project-specific data
-n477.subjs <- read.csv('/data/joy/BBL/projects/rewardAnalysisReproc/qa/n477_scanid_bblid_date_datexscanid.csv')
+n477.subjs <- read.csv('/data/joy/BBL/projects/rewardAnalysisReproc/subjectLists/n477_scanid_bblid_date_datexscanid.csv')
 n477.subjs <- n477.subjs[,c(2,1)]
 
 
@@ -46,5 +45,5 @@ n477.vol.vals <- merge(n477.subjs, jlfVals, by=c('bblid', 'scanid'))
 n477.vol.ct.vals <- merge(n477.subjs, ctVals, by=c('bblid', 'scanid'))
 
 # Now write the output
-write.csv(n477.vol.vals, paste('/data/joy/BBL/projects/grmpyProcessing2017/structural/OutputROI/JLFvol/n477_jlfAntsCTIntersectionVol_',format(Sys.Date(), format="%Y%m%d"),'.csv', sep=''), quote=F, row.names=F)
-write.csv(n477.vol.ct.vals, paste('/data/joy/BBL/projects/grmpyProcessing2017/structural/OutputROI/JLFvol/n477_ctVol',format(Sys.Date(), format="%Y%m%d"), '.csv', sep=''), quote=F, row.names=F)
+write.csv(n477.vol.vals, paste('/data/joy/BBL/projects/rewardAnalysisReproc/qa/t1/output/n477_jlfAntsCTIntersectionVol_',format(Sys.Date(), format="%Y%m%d"),'.csv', sep=''), quote=F, row.names=F)
+write.csv(n477.vol.ct.vals, paste('/data/joy/BBL/projects/rewardAnalysisReproc/qa/t1/output/n477_ctVol',format(Sys.Date(), format="%Y%m%d"), '.csv', sep=''), quote=F, row.names=F)
