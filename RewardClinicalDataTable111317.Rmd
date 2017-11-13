@@ -8,7 +8,7 @@ output: rmarkdown::github_document
 
 ###Clinical Data Table construction for Reward Structure Project 
 
-####**This script generates a clinical table based on redcap data, clinical QA, and scan availability (T1 and/or restbold)**
+####**This script generates a n304 sample based on redcap assessments, clinical QA, and scan availability (T1 and/or restbold)**
 
 ####N=304 (final unique T1 images)
 #####N=126 scans removed as were duplicates (e.g. went with the lowest trait distance or clinical comments)
