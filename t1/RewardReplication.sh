@@ -23,7 +23,7 @@ mkdir -p /home/rjirsaraie/Testing/RewardReplication
 
 cd /home/rjirsaraie/Testing/RewardReplication
 
-git clone git@github.com:PennBBL/rewardAnalysisReprocScripts.git
+#git clone git@github.com:PennBBL/rewardAnalysisReprocScripts.git # Use Git Pull Instead!
 
 mkdir DesignFile
 mkdir CohortFile
@@ -68,6 +68,3 @@ chmod +x /home/rjirsaraie/Testing/RewardReplication/DesignFile/struct_pipeline_r
 ###################################################################################################
 #####  ⚡  ⚡  ⚡  ⚡  ⚡  ⚡  ⚡  ⚡  ⚡  ⚡  ⚡  ⚡  ⚡  ⚡  ⚡  ⚡  ⚡  ⚡  ⚡  ⚡  ⚡  ⚡  ⚡  ⚡  ⚡  ⚡  ⚡  ⚡  ⚡  #####
 ###################################################################################################
-
-
-
