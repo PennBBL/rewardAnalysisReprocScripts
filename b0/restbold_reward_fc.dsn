@@ -35,7 +35,7 @@
 analysis=accelerator_$(whoami)
 design=/data/joy/BBL/projects/rewardAnalysisReproc/rewardAnalysisReprocScripts/b0/restbold_reward_fc.dsn
 sequence=rest
-standard=PNC%2x2x2
+standard=REWARD%2x2x2
 
 ###################################################################
 # PIPELINE
@@ -187,7 +187,7 @@ roiquant_cleanup[9]=1
 # 10 SEED
 ###################################################################
 
-seed_lib[10]=/home/rciric/xcpAccelerator/xcpEngine/00TEST/examplePNC.sclib
+seed_lib[10]=/data/joy/BBL/projects/rewardAnalysisReproc/rewardAnalysisReprocScripts/b0/rewardVSseed.sclib
 seed_smo[10]=6
 seed_sptf[10]=susan
 seed_usan[10]=${segmentation[sub]}
