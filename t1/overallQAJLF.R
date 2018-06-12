@@ -1,15 +1,6 @@
-##############################################################################
-################                                               ###############
-################          Overall 1601 Structural QA           ###############
-################           Angel Garcia de la Garza            ###############
-################              angelgar@upenn.edu               ###############
-################                 10/05/2016                    ###############
-##############################################################################
-################          Reward 477 Structural QA             ###############
-################               Lauren Beard                    ###############
-################             lbeard@sas.upenn.edu              ###############
-################                 07/21/2017                    ###############
-##############################################################################
+# ------------------------ #
+# Reward 489 Structural QA #
+# ------------------------ #
 
 ##############################################################################
 ## Volume ROI Flagging
@@ -17,21 +8,21 @@
 
 
 ## Read in Data
-JLFVol <- read.csv("/data/joy/BBL/projects/rewardAnalysisReproc/qa/output/n477_jlfAntsCTIntersectionVol_20170721.csv")
-JLF_CT <- read.csv("/data/joy/BBL/projects/rewardAnalysisReproc/qa/output/jlfAntsValuesCT.csv")
-CTVol <- read.csv("/data/joy/BBL/projects/rewardAnalysisReproc/qa/output/n477_ctVol20170721.csv")
-norm <- read.csv("/data/joy/BBL/projects/rewardAnalysisReproc/qa/output/n477_norm.csv")
-bblid_scanid_datexscanid <- read.csv("/data/joy/BBL/projects/rewardAnalysisReproc/n477_scanid_bblid_date_datexscanid.csv")
+JLFVol <- read.csv("/data/jux/BBL/projects/rewardAnalysisReproc/qa/t1/output_20180611/n489_jlfAntsCTIntersectionVol_20180611.csv")
+JLF_CT <- read.csv("/data/jux/BBL/projects/rewardAnalysisReproc/qa/t1/output_20180611/jlfAntsValuesCT.csv") 
+CTVol <- read.csv("/data/jux/BBL/projects/rewardAnalysisReproc/qa/t1/output_20180611/n489_ctVol20180611.csv")
+norm <- read.csv("/data/jux/BBL/projects/rewardAnalysisReproc/qa/t1/output/n489_norm_20180611.csv")
+bblid_scanid_datexscanid <- read.csv("/data/jux/BBL/projects/rewardAnalysisReproc/subjectLists/n489_bblid_datexscanid_scanid.csv",header=FALSE)
 dataQA <- merge(JLFVol, JLF_CT, by=c("bblid","scanid"))
 dataQA <- merge(dataQA, CTVol, by=c("bblid","scanid"))
 
 ##Generate JLF Dataset
-dataJLF <- read.csv("/data/joy/BBL/projects/rewardAnalysisReproc/qa/output/n477_jlfAntsCTIntersectionVol_20170721.csv")
+dataJLF <- read.csv("/data/jux/BBL/projects/rewardAnalysisReproc/qa/t1/output_20180611/n489_jlfAntsCTIntersectionVol_20180611.csv")
 dataJLF$mean <- rowMeans(dataJLF[, 3:131])
 
 
 ##Create DataFrame for QA Values
-dataOut <- as.data.frame(matrix(0, nrow=477, ncol=132))
+dataOut <- as.data.frame(matrix(0, nrow=489, ncol=132))
 
 ## For each ROI calculate mean and SD and flag outlier ROIs
 for (i in 3:131) {
@@ -58,7 +49,7 @@ names(dataFinal)[3] <- "JLFVolROIFlag"
 ## Volume Laterality Flagging
 ##############################################################################
 
-dataOut <- as.data.frame(matrix(0, nrow=477, ncol=132))
+dataOut <- as.data.frame(matrix(0, nrow=489, ncol=132))
 
 index <- grep("_R_", names(dataJLF))
 
@@ -98,11 +89,11 @@ names(dataFinal)[4] <- "JLFVolLateralFlag"
 ##############################################################################
 
 #Generate 1601 Dataset
-dataJLF <- read.csv("/data/joy/BBL/projects/rewardAnalysisReproc/qa/output/jlfAntsValuesCT.csv", as.is = T)
+dataJLF <- read.csv("/data/jux/BBL/projects/rewardAnalysisReproc/qa/t1/output_20180611/jlfAntsValuesCT.csv", as.is = T)
 
 dataJLF$mean <- rowMeans(dataJLF[, 3:100])
 
-dataOut <- as.data.frame(matrix(0, nrow=477, ncol=101))
+dataOut <- as.data.frame(matrix(0, nrow=489, ncol=101))
 
 #Calcualte mean and SD across all ROI
 for (i in 3:101) {
@@ -129,7 +120,7 @@ names(dataFinal)[5] <- "JLFCTROIFlag"
 ##############################################################################
 
 
-dataOut <- as.data.frame(matrix(0, nrow=477, ncol=101))
+dataOut <- as.data.frame(matrix(0, nrow=489, ncol=101))
 
 index <- grep("_R_", names(dataJLF))
 
@@ -168,6 +159,10 @@ names(dataFinal)[6] <- "JLFCTLateralFlag"
 ##############################################################################
 ## Spatial Correlation Flag
 ##############################################################################
+names(bblid_scanid_datexscanid)[1] <- "bblid"
+names(bblid_scanid_datexscanid)[3] <- "scanid"
+names(bblid_scanid_datexscanid)[2] <- "datexscanid"
+
 norm$spatialCorrFlag <- 0
 meanJLF <- mean(norm$normCrossCorr)
 sdJLF <- sd(norm$normCrossCorr)
@@ -205,8 +200,9 @@ names(dataQA)[230:235] <- paste0("flag", names(dataQA)[index])
 
 ## Merge all flags up until this point and create a final dataset 
 dataFinal$finalFlag <- rowSums(dataFinal[, c(3:8)])
+dataFinal$finalFlag[dataFinal$finalFlag > 0.5] <- 1
 
 #Clean Final dataset
-write.csv(dataFinal, "/data/joy/BBL/projects/rewardAnalysisReproc/qa/output/n477_reward_QAFlags_Structural_final.csv",row.names=FALSE)
+write.csv(dataFinal, "/data/jux/BBL/projects/rewardAnalysisReproc/qa/t1/output_20180611/n489_reward_QAFlags_Structural_final.csv",row.names=FALSE)
 
 dataFinal$bblid[is.na(dataFinal$finalFlag)]
