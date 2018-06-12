@@ -7,7 +7,7 @@ qa=$(ls -d /data/jux/BBL/projects/rewardAnalysisReproc/qa)
 function=/data/jux/BBL/projects/rewardAnalysisReproc/rewardAnalysisReprocScripts/t1/createUnionJLFAndCTGMMask.sh
 
 # Set variables
-for i in $(cat /data/jux/BBL/projects/rewardAnalysisReproc/subjectLists/n489_bblid_datexscanid_scanid.csv); do
+for i in $(cat /data/jux/BBL/projects/rewardAnalysisReproc/xnatDownload2/n12_bblid_datexscanid_scanid.csv); do
 	bblid=`echo "$i" | awk -F ',' '{print $1}'`
 	datexscanid=`echo "$i" | awk -F ',' '{print $2}'`
  
