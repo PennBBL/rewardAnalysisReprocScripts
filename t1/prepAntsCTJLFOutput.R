@@ -8,13 +8,15 @@
 
 # Load data
 source('/home/arosen/adroseHelperScripts/R/afgrHelpFunc.R')
-columnValues <- read.csv("/data/joy/BBL/projects/pncReproc2015/pncReproc2015Scripts/jlf/labelList/inclusionCheck.csv")
+columnValues <- read.csv("/data/jux/BBL/projects/rewardAnalysisReproc/subjectLists/inclusionCheck.csv")
 # ctValues was created by using the command found below:
-#system("$XCPEDIR/utils/combineOutput -p /data/joy/BBL/studies/reward/processedData/struct_pipeline/struct_pipeline_201705311006/ -f JLF_val_corticalThickness.1D -o antsCT_JLF_vals.1D")
+#system("$XCPEDIR/utils/combineOutput -p /data/jux/BBL/studies/reward/processedData/structural/struct_pipeline_201705311006/ -f JLF_val_corticalThickness.1D -o antsCT_JLF_vals.1D")
 #system("mv /data/joy/BBL/studies/reward/processedData/struct_pipeline/struct_pipeline_201705311006/antsCT_JLF_vals.1D /data/joy/BBL/projects/rewardAnalysisReproc/qa/output/jlfAntsCTVals.1D") 
-ctValues <- read.table("/data/joy/BBL/projects/rewardAnalysisReproc/qa/output/jlfAntsCTVals.1D", header=T)
-n477.subjs <- read.csv('/data/joy/BBL/projects/rewardAnalysisReproc/n477_scanid_bblid_date_datexscanid.csv')
-n477.subjs <- n477.subjs[,c(2,1)]
+ctValues <- read.table("/data/jux/BBL/projects/rewardAnalysisReproc/qa/t1/output_20180611/jlfAntsCTVals.1D", header=T)
+n489.subjs <- read.csv('/data/jux/BBL/projects/rewardAnalysisReproc/subjectLists/n489_bblid_datexscanid_scanid.csv')
+n489.subjs <- n489.subjs[,c(1,3)]
+names(n489.subjs)[1] <- "bblid"
+names(n489.subjs)[2] <- "scanid"
 
 # Now I need to limit it to just the NZmeans 
 nzCols <- grep('NZMean', names(ctValues))
@@ -38,9 +40,9 @@ ctValues[,2] <- strSplitMatrixReturn(ctValues$subject.1., 'x')[,2]
 colnames(ctValues)[1:2] <- c('bblid', 'scanid')
 
 # Now write the csv
-write.csv(ctValues, '/data/joy/BBL/projects/rewardAnalysisReproc/qa/output/jlfAntsValuesCT.csv', quote=F, row.names=F)
-write.csv(ctValues, paste('/data/joy/BBL/projects/rewardAnalysisReproc/qa/output/n477_jlfAntsCTIntersectionCt_',format(Sys.Date(), format="%Y%m%d"),'.csv', sep=''), quote=F, row.names=F)
+write.csv(ctValues, '/data/jux/BBL/projects/rewardAnalysisReproc/qa/t1/output_20180611/jlfAntsValuesCT.csv', quote=F, row.names=F)
+write.csv(ctValues, paste('/data/jux/BBL/projects/rewardAnalysisReproc/qa/t1/output_20180611//n489_jlfAntsCTIntersectionCt_',format(Sys.Date(), format="%Y%m%d"),'.csv', sep=''), quote=F, row.names=F)
 
-# Now do the n477 specific csv
-n477.ct.values <- merge(n477.subjs, ctValues, by=c('bblid', 'scanid'))
-write.csv(n477.ct.values, paste('/data/joy/BBL/projects/rewardAnalysisReproc/qa/output/n477_jlfAtroposIntersectionCT_',format(Sys.Date(), format="%Y%m%d"),'.csv', sep=''), quote=F, row.names=F)
+# Now do the n489 specific csv
+n489.ct.values <- merge(n489.subjs, ctValues, by=c('bblid', 'scanid'))
+write.csv(n489.ct.values, paste('/data/jux/BBL/projects/rewardAnalysisReproc/qa/t1/output_20180611//n489_jlfAtroposIntersectionCT_',format(Sys.Date(), format="%Y%m%d"),'.csv', sep=''), quote=F, row.names=F)
