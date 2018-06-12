@@ -1,4 +1,4 @@
 SPACE::NETWORK
 :#NAME#MAP#SPACE
-#JLF#/data/joy/BBL/studies/reward/processedData/struct_pipeline/struct_pipeline_201705311006/${subject[0]}/${subject[1]}/jlf/${subject[0]}_${subject[1]}_Labels.nii.gz#str
+#JLF#/data/joy/BBL/studies/reward/processedData/structural/struct_pipeline_201705311006/${subject[0]}/${subject[1]}/jlf/${subject[0]}_${subject[1]}_LabelsAntsCTIntersect.nii.gz#str
 #Glasser180#/data/joy/BBL/studies/reward/templateCohort/template/templateTransforms/180GlasserReward.nii.gz#std
