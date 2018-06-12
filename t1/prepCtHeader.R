@@ -10,7 +10,7 @@ install_load('tools')
 # Load data
 inputDataValues <- commandArgs()[5]
 valuesToFix <- read.csv(inputDataValues, header=T)
-columnNames <- read.csv('/data/joy/BBL/projects/pncReproc2015/jlf/volumeValues/ctVolNames.csv')
+columnNames <- read.csv('/data/jux/BBL/projects/rewardAnalysisReproc/subjectLists/ctVolNames.csv')
 
 # Now rm the background column
 valuesToFix <- valuesToFix[,-3]
