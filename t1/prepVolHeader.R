@@ -10,7 +10,7 @@ install_load('tools')
 # Load data
 inputDataValues <- commandArgs()[5]
 valuesToFix <- read.csv(inputDataValues, header=T)
-columnValues <- read.csv('/data/joy/BBL/projects/pncReproc2015/pncReproc2015Scripts/jlf/labelList/inclusionCheck.csv')
+columnValues <- read.csv('/data/jux/BBL/projects/rewardAnalysisReproc/subjectLists/inclusionCheck.csv')
 
 # Now I need to take only the columns of interest
 colsOfInterest <- columnValues$Label.Number[which(columnValues$Volume==0)] + 3
