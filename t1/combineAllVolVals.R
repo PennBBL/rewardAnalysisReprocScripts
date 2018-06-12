@@ -13,14 +13,16 @@ source('/home/arosen/adroseHelperScripts/R/afgrHelpFunc.R')
 install_load('tools')
 
 # Load pre-made data
-jlfVals <- read.csv('/data/joy/BBL/projects/rewardAnalysisReproc/qa/t1/output/jlfVolValues_20170719properSubjFields.csv')
-ctVals <- read.csv('/data/joy/BBL/projects/rewardAnalysisReproc/qa/t1/output/ctVolValues_20170719properSubjFields.csv')
-voxelDim <- read.csv('/data/joy/BBL/projects/rewardAnalysisReproc/qa/t1/output/voxelVolume_20170719properSubjFields.csv')
+jlfVals <- read.csv('/data/jux/BBL/projects/rewardAnalysisReproc/qa/t1/output_20180611/jlfVolValues_20180611properSubjFieldsProperColNames.csv')
+ctVals <- read.csv('/data/jux/BBL/projects/rewardAnalysisReproc/qa/t1/output_20180611/ctVolValues_20180611properSubjFieldsProperColNames.csv')
+voxelDim <- read.csv('/data/jux/BBL/projects/rewardAnalysisReproc/qa/t1/output_20180611/voxelVolume_20180611properSubjFields.csv')
 voxelDim <- voxelDim[which(duplicated(voxelDim)=='FALSE'),]
 
 # Load project-specific data
-n477.subjs <- read.csv('/data/joy/BBL/projects/rewardAnalysisReproc/subjectLists/n477_scanid_bblid_date_datexscanid.csv')
-n477.subjs <- n477.subjs[,c(2,1)]
+n489.subjs <- read.csv('/data/jux/BBL/projects/rewardAnalysisReproc/subjectLists/n489_bblid_datexscanid_scanid.csv',header=FALSE)
+n489.subjs <- n489.subjs[,c(1,3)]
+names(n489.subjs)[1] <- "bblid"
+names(n489.subjs)[2] <- "scanid"
 
 
 # Convert all of our voxel counts to mm3
@@ -41,9 +43,9 @@ ctVals[,2] <- strSplitMatrixReturn(charactersToSplit=ctVals[,2], splitCharacter=
 
 # Now write the n1601 file
 # Start with JLF volumes
-n477.vol.vals <- merge(n477.subjs, jlfVals, by=c('bblid', 'scanid'))
-n477.vol.ct.vals <- merge(n477.subjs, ctVals, by=c('bblid', 'scanid'))
+n489.vol.vals <- merge(n489.subjs, jlfVals, by=c('bblid', 'scanid'))
+n489.vol.ct.vals <- merge(n489.subjs, ctVals, by=c('bblid', 'scanid'))
 
 # Now write the output
-write.csv(n477.vol.vals, paste('/data/joy/BBL/projects/rewardAnalysisReproc/qa/t1/output/n477_jlfAntsCTIntersectionVol_',format(Sys.Date(), format="%Y%m%d"),'.csv', sep=''), quote=F, row.names=F)
-write.csv(n477.vol.ct.vals, paste('/data/joy/BBL/projects/rewardAnalysisReproc/qa/t1/output/n477_ctVol',format(Sys.Date(), format="%Y%m%d"), '.csv', sep=''), quote=F, row.names=F)
+write.csv(n489.vol.vals, paste('/data/jux/BBL/projects/rewardAnalysisReproc/qa/t1/output_20180611/n489_jlfAntsCTIntersectionVol_',format(Sys.Date(), format="%Y%m%d"),'.csv', sep=''), quote=F, row.names=F)
+write.csv(n489.vol.ct.vals, paste('/data/jux/BBL/projects/rewardAnalysisReproc/qa/t1/output_20180611/n489_ctVol',format(Sys.Date(), format="%Y%m%d"), '.csv', sep=''), quote=F, row.names=F)
